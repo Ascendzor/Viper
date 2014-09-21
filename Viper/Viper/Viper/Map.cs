@@ -63,15 +63,14 @@ namespace Viper
         {
             effect = new BasicEffect(Game1.Device);
             effect.EnableDefaultLighting();
-            effect.View = Camera.View;
-            effect.Projection = Camera.Projection;
             effect.TextureEnabled = true;
-            
             effect.Texture = texture;
         }
 
         public static void Draw()
         {
+            effect.View = Camera.View;
+            effect.Projection = Camera.Projection;
             foreach (EffectPass pass in effect.CurrentTechnique.Passes)
             {
                 pass.Apply();

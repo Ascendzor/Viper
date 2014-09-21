@@ -35,6 +35,8 @@ namespace Viper
             Camera.Initialize();
             Map.Initialize(Content.Load<Texture2D>("heightmap"), Content.Load<Texture2D>("grass_texture238"));
 
+            Input.Initialize(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             base.Initialize();
@@ -42,6 +44,9 @@ namespace Viper
 
         protected override void Update(GameTime gameTime)
         {
+            Input.Update(Mouse.GetState(), Keyboard.GetState());
+            Camera.Update();
+
             base.Update(gameTime);
         }
 

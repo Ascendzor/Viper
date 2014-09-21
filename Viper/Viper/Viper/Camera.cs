@@ -18,5 +18,10 @@ namespace Viper
             View = Matrix.CreateLookAt(Position, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
             Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, 4f / 3f, 1, 500);
         }
+
+        public static void Update()
+        {
+            View = Matrix.CreateLookAt(Position, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+        }
     }
 }
