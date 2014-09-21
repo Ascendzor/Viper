@@ -19,6 +19,8 @@ namespace Viper
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static GraphicsDevice Device;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,6 +29,12 @@ namespace Viper
 
         protected override void Initialize()
         {
+            Device = GraphicsDevice;
+            Configure();
+            
+            Camera.Initialize();
+            Map.Initialize(Content.Load<Texture2D>("heightmap"), Content.Load<Texture2D>("grass_texture238"));
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             base.Initialize();
@@ -41,7 +49,17 @@ namespace Viper
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            Map.Draw();
+
             base.Draw(gameTime);
+        }
+
+        private void Configure()
+        {
+            IsMouseVisible = true;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.ApplyChanges();
         }
     }
 }
