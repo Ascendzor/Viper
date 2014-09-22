@@ -69,6 +69,7 @@ namespace Viper
         private void Configure()
         {
             IsMouseVisible = true;
+            IsFixedTimeStep = false; //potentially an issue with time and shit but it fixes weird CPU spikes?
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
             graphics.ApplyChanges();

@@ -31,12 +31,15 @@ namespace Viper
         {
             if ((goalPosition - position).Length() > 1)
             {
+                direction = goalPosition - position;
+                direction.Normalize();
                 position += direction * velocity;
             }
         }
 
         public void Draw()
         {
+            angle = (float)Math.Atan2(direction.X, direction.Z) + MathHelper.ToRadians(-90);
             foreach (ModelMesh mesh in model.Meshes)
             {
                 foreach (BasicEffect effect in mesh.Effects)
@@ -54,9 +57,6 @@ namespace Viper
         public void MoveTo(Vector3 goalPosition)
         {
             this.goalPosition = goalPosition;
-            direction = goalPosition - position;
-            direction.Normalize();
-            angle = (float)Math.Atan2(direction.X, direction.Z) + MathHelper.ToRadians(-90);
         }
     }
 }
