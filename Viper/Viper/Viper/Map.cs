@@ -19,6 +19,7 @@ namespace Viper
         {
             heightMap = _heightMap;
             texture = _texture;
+
             SetupVertices();
             SetupIndices();
             SetupShittyStupidShit();
@@ -76,6 +77,20 @@ namespace Viper
                 pass.Apply();
                 Game1.Device.DrawUserIndexedPrimitives<VertexPositionNormalTexture>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
             }
+        }
+
+        public static Vector3 GetPosition(Ray ray)
+        {
+            Plane plane = new Plane(new Vector3(0, 1, 0), 0);
+            float? distance = ray.Intersects(plane);
+
+            //ripped from http://xboxforums.create.msdn.com/forums/p/10441/212094.aspx
+            //how the fuck does this work?
+            double denominator = Vector3.Dot(plane.Normal, ray.Direction);
+            double numerator = Vector3.Dot(plane.Normal, ray.Position) + plane.D;
+            double t = -(numerator / denominator);
+
+            return ray.Position + ray.Direction * (float)t;
         }
     }
 }

@@ -39,6 +39,7 @@ namespace Viper
             pudge = new Pudge(new Vector3(50, 0, 50), Content.Load<Model>("tuskarrmale"));
 
             Input.Initialize(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            Input.pudge = pudge;
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -49,6 +50,8 @@ namespace Viper
         {
             Input.Update(Mouse.GetState(), Keyboard.GetState());
             Camera.Update();
+
+            pudge.Update();
 
             base.Update(gameTime);
         }
