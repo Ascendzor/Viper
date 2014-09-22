@@ -21,6 +21,8 @@ namespace Viper
 
         public static GraphicsDevice Device;
 
+        private Pudge pudge;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -34,6 +36,7 @@ namespace Viper
             
             Camera.Initialize();
             Map.Initialize(Content.Load<Texture2D>("heightmap"), Content.Load<Texture2D>("grass_texture238"));
+            pudge = new Pudge(new Vector3(50, 0, 50), Content.Load<Model>("tuskarrmale"));
 
             Input.Initialize(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
@@ -55,6 +58,7 @@ namespace Viper
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             Map.Draw();
+            pudge.Draw();
 
             base.Draw(gameTime);
         }
