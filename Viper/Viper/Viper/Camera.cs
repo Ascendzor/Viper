@@ -14,14 +14,14 @@ namespace Viper
 
         public static void Initialize()
         {
-            Position = new Vector3(100, 100, 100);
-            View = Matrix.CreateLookAt(Position, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
-            Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, 4f / 3f, 1, 500);
+            Position = new Vector3(100, 200, 100);
+            View = Matrix.CreateLookAt(Position, Position + new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+            Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, 4f / 3f, 1, 50000);
         }
 
         public static void Update()
         {
-            View = Matrix.CreateLookAt(Position, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+            View = Matrix.CreateLookAt(Position, Position + new Vector3(0, -Position.Y, 100), new Vector3(0, 1, 0));
         }
     }
 }

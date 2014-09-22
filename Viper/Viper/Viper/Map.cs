@@ -31,7 +31,7 @@ namespace Viper
             {
                 for (int y = 0; y < heightMap.Height; y++)
                 {
-                    vertices[x + y * heightMap.Height].Position = new Vector3(x, 1, y);
+                    vertices[x + y * heightMap.Height].Position = new Vector3(x*2, 1, y*2);
                     vertices[x + y * heightMap.Height].TextureCoordinate.X = (float)x / 30.0f;
                     vertices[x + y * heightMap.Height].TextureCoordinate.Y = (float)y / 30.0f;
                     vertices[x + y * heightMap.Height].Normal = new Vector3(0, 1, 0);

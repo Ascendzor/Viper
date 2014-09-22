@@ -19,17 +19,33 @@ namespace Viper
 
         public static void Update(MouseState mouse, KeyboardState keyboard)
         {
-            Console.WriteLine(mouse.X + " " + windowWidth);
-            Console.WriteLine("input updating");
             if (mouse.X < (windowWidth * 0.1))
             {
-                Console.WriteLine("tried to move camera");
-                Camera.Position.X -= 1f;
+                Camera.Position.X += 1f;
             }
             else if (mouse.X > (windowWidth * 0.9))
             {
-                Console.WriteLine("tried to move camera");
-                Camera.Position.X += 1f;
+                Camera.Position.X -= 1f;
+            }
+
+            if (mouse.Y < (windowHeight * 0.1))
+            {
+                Camera.Position.Z += 1f;
+            }
+            else if (mouse.Y > (windowHeight * 0.9))
+            {
+                Camera.Position.Z -= 1f;
+            }
+
+            DevInput(mouse, keyboard);
+        }
+
+        private static void DevInput(MouseState mouse, KeyboardState keyboard)
+        {
+            if (keyboard.GetPressedKeys().Contains(Keys.Space))
+            {
+                Camera.Position.X = 0;
+                Camera.Position.Z = 0;
             }
         }
     }
