@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,9 @@ namespace Viper
     {
         private Vector3 position;
         private Vector3 goalPosition;
+        private Vector3 direction;
         private float velocity;
+        private float angle;
 
         private Model model;
 
@@ -20,6 +21,7 @@ namespace Viper
         {
             this.position = position;
             this.goalPosition = position;
+            this.direction = new Vector3(0, 0, 1);
             velocity = 1;
 
             this.model = model;
@@ -29,9 +31,6 @@ namespace Viper
         {
             if ((goalPosition - position).Length() > 1)
             {
-                Vector3 direction = goalPosition - position;
-                direction.Normalize();
-
                 position += direction * velocity;
             }
         }
@@ -45,7 +44,7 @@ namespace Viper
                     effect.EnableDefaultLighting();
                     effect.View = Camera.View;
                     effect.Projection = Camera.Projection;
-                    effect.World = Matrix.CreateScale(0.25f) * Matrix.CreateTranslation(position);
+                    effect.World = Matrix.CreateScale(0.25f) * Matrix.CreateRotationY(angle) * Matrix.CreateTranslation(position);
 
                     mesh.Draw();
                 }
@@ -55,6 +54,9 @@ namespace Viper
         public void MoveTo(Vector3 goalPosition)
         {
             this.goalPosition = goalPosition;
+            direction = goalPosition - position;
+            direction.Normalize();
+            angle = (float)Math.Atan2(direction.X, direction.Z) + MathHelper.ToRadians(-90);
         }
     }
 }
